@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class JavaChatbot {
+    
+    // Define some basic intents and responses
+    private static Map<String, String> responses = new HashMap<>();
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Predefined responses
+        responses.put("hello", "Hello! How can I help you today?");
+        responses.put("how are you", "I'm just a bot, but I'm doing great! How can I assist you?");
+        responses.put("bye", "Goodbye! Have a nice day!");
+        responses.put("thanks", "You're welcome! Glad to help.");
+        responses.put("what is your name", "I am JavaBot, your virtual assistant.");
+        
+        System.out.println("Chatbot: Hello! Type 'bye' to exit.");
+        
+        while (true) {
+            // Take user input
+            System.out.print("You: ");
+            String userInput = scanner.nextLine().toLowerCase();
+            
+            // Check for exit condition
+            if (userInput.equals("bye")) {
+                System.out.println("Chatbot: Goodbye! See you next time.");
+                break;
+            }
+            
+            // Match the user input with predefined responses
+            String response = getResponse(userInput);
+            System.out.println("Chatbot: " + response);
+        }
+        
+        scanner.close();
+    }
+
+    // Method to find the best response based on user input
+    private static String getResponse(String userInput) {
+        for (Map.Entry<String, String> entry : responses.entrySet()) {
+            if (userInput.contains(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return "Sorry, I didn't understand that. Can you ask something else?";
+    }
+}
